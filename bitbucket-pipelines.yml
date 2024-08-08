@@ -1,0 +1,16 @@
+#  Template python-build
+
+#  This template allows you to validate your python code.
+#  The workflow allows running tests and code linting on the default branch.
+
+image: python:3.12.3
+
+pipelines:
+  default:
+      - step:
+          name: Build and Test
+          caches:
+            - pip
+          script:
+            - echo "Starting build and test process"
+            - python -m unittest discover -s tests
