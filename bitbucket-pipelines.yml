@@ -16,4 +16,4 @@ pipelines:
             - pip install --upgrade pip
             - pip install -r sabpaisa_pro/requirements.txt
             - python -m unittest discover -s sabpaisa_pro/sabpaisa_app
-            tests.py
+                   tests.py
