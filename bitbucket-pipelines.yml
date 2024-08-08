@@ -13,5 +13,5 @@ pipelines:
             - pip
           script:
             - echo "Starting build and test process"
-            - pip install -r requirements.txt
+            - pip install -r /sabpaisa_pro/requirements.txt
             - python -m unittest discover -s tests 
