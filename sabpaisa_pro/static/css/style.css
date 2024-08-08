@@ -1,4 +1,4 @@
-/*
+
 *,
 *:before,
 *:after{
@@ -88,17 +88,20 @@ input{
 ::placeholder{
     color: #e5e5e5;
 }
-button{
-    margin-top: 50px;
-    width: 100%;
+a {
+    display: inline-block;
+    text-decoration: none;
     background-color: #ffffff;
     color: #080710;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
+    padding: 4px 137px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 30px;
     cursor: pointer;
+    margin-top: 56px;
 }
+
+
 .social{
   margin-top: 30px;
   display: flex;
@@ -121,7 +124,9 @@ button{
 .social i{
   margin-right: 4px;
 }
-*/
+
+
+/*
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 *{
@@ -141,8 +146,7 @@ body{
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
-    /* background: linear-gradient(#64e2e6, #9198e5);    */
-}
+} 
 
 #loginForm{
     width: 600px;
@@ -189,10 +193,11 @@ margin-top: 21px;
     display: flex;
     justify-content: space-around;
     gap: 3rem;
-    /* margin-bottom: 20px; */
     
    
 }
 .remember-forgot a{
     text-decoration: none;
 }
+    */
+

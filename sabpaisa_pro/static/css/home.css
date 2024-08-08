@@ -1,0 +1,54 @@
+
+/* Background Image */
+body {
+    background: url('https://www.shutterstock.com/shutterstock/photos/2237498015/display_1500/stock-photo-minimalist-web-of-wild-spider-with-tiny-drops-of-water-shining-in-light-on-black-background-2237498015.jpg') no-repeat center center fixed; /* Replace with your online link */
+    background-size: cover;
+    height: 100vh;
+    color: white;
+}
+
+/* Main Content Styling */
+.main-content {
+    height: calc. (100vh - 56px); /* Adjust to account for navbar height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-message {
+    animation: fadeIn 2s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Transaction Data Table */
+#transactionData table {
+    width: 100%;
+    margin-top: 20px;
+    color: black;
+    background-color: white;
+}
+
+#transactionData th, #transactionData td {
+    padding: 10px;
+    text-align: left;
+}
