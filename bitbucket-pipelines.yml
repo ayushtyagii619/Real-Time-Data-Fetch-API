@@ -13,4 +13,4 @@ pipelines:
             - pip
           script:
             - echo "Starting build and test process"
-            - python -m unittest discover -s tests
+            - python -m unittest discover -s tests -p "*.py"
