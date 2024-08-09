@@ -1,27 +1,20 @@
 image: python:3.12.3
 
 pipelines:
-  default:
-    - step:
-        name: Build artifact
-        script:
-          - pwd
-          - ls -al
-          - mkdir artifact
-          - echo "Starting build process"
-          - pip install --upgrade pip
-          - pip install -r sabpaisa_pro/requirements.txt
-          - echo "Pipelines is awesome!" 
-        artifacts:
-          - artifact/*
-    - step:
-        name: Deploy to S3
-        deployment: Staging
-        script:
-          - pipe: atlassian/aws-s3-deploy:0.3.8
-            variables:
-              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-              AWS_DEFAULT_REGION: 'ap-south-1'
-              S3_BUCKET: 'protal-sabpaisa-fend '
-              LOCAL_PATH: 'artifact'
+  tags:
+    "ecr-release-*":
+      - step:
+          services:
+            - docker
+          caches:
+            - pip
+          script:
+            - pip3 install awscli
+            - IMAGE="813659156632.dkr.ecr.ap-south-1.amazonaws.com/back-end-python"
+            - TAG="${BITBUCKET_BRANCH}:${BITBUCKET_TAG}"
+            - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+            - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+            - eval $(aws ecr get-login --region ap-south-1 --no-include-email | sed 's;https://;;g')
+            - docker build -t $IMAGE -f Dockerfile .
+            - docker tag $IMAGE $AWS_ECR_URI:$TAG
+            - docker push $AWS_ECR_URI:$TAG
