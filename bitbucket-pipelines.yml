@@ -5,6 +5,8 @@ pipelines:
     - step:
         name: Build artifact
         script:
+          - pwd
+          - ls -al
           - mkdir artifact
           - echo "Starting build process"
           - pip install --upgrade pip
