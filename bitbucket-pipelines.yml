@@ -1,18 +1,25 @@
-#  Template python-build
-
-#  This template allows you to validate your python code.
-#  The workflow allows running tests and code linting on the default branch.
-
 image: python:3.12.3
 
 pipelines:
   default:
-      - step:
-          name: Build 
-          caches:
-            - pip
-          script:
-            - echo "Starting build process"
-            - pip install --upgrade pip
-            - pip install -r sabpaisa_pro/requirements.txt
-     
+    - step:
+        name: Build artifact
+        script:
+          - mkdir artifact
+          - echo "Starting build process"
+          - pip install --upgrade pip
+          - pip install -r sabpaisa_pro/requirements.txt
+          - echo "Pipelines is awesome!" 
+        artifacts:
+          - artifact/*
+    - step:
+        name: Deploy to S3
+        deployment: Staging
+        script:
+          - pipe: atlassian/aws-s3-deploy:0.3.8
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: 'ap-south-1'
+              S3_BUCKET: 'protal-sabpaisa-fend '
+              LOCAL_PATH: 'artifact'
