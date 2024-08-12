@@ -1,0 +1,22 @@
+{
+  "family": "my-task-definition",
+  "requiresCompatibilities": ["EC2"],
+  "networkMode": "awsvpc",
+  "cpu": 1024,
+  "memory": 512,
+  "executionRoleArn": "arn:aws:iam::813659156632:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "my-container",
+      "image": "${ECR_REGISTRY}/my-image:latest",
+      "cpu": 10,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  ]
+}
