@@ -12,9 +12,10 @@ pipelines:
             - pip3 install awscli
             - IMAGE="813659156632.dkr.ecr.ap-south-1.amazonaws.com/back-end-python"
             - TAG="SB-api"
+            - AWS_ECR_URI="813659156632.dkr.ecr.ap-south-1.amazonaws.com/back-end-python"
             - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
             - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
             - eval $(aws ecr get-login --region ap-south-1 --no-include-email | sed 's;https://;;g')
             - docker build -t $IMAGE -f Dockerfile .
-            - docker tag $IMAGE $AWS_ECR_URI:$TAG
-            - docker push $AWS_ECR_URI:$TAG
+            - docker tag $IMAGE ${AWS_ECR_URI}:${TAG}
+            - docker push ${AWS_ECR_URI}:${TAG}
