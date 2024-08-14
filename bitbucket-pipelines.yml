@@ -35,7 +35,7 @@ pipelines:
             - docker build -t sample-python-app  .
             - docker tag sample-python-app:latest $DOCKER_IMAGE_URL 
             - docker push $DOCKER_IMAGE_URL
-            - export TASK_VERSION=$((aws ecs register-task-definition --execution-role-arn $EXECUTION_ROLE --cli-input-json file:///opt/atlassian/pipelines/agent/build/task-definition.json) | grep revision | cut -d ":" -f2 | cut -d "," -f1 | tr -d ' ')
+            - export TASK_VERSION=$((aws ecs register-task-definition --execution-role-arn $EXECUTION_ROLE --cli-input-json file:///opt/atlassian/pipelines/agent/build/task-def.json) | grep revision | cut -d ":" -f2 | cut -d "," -f1 | tr -d ' ')
             - echo $TASK_VERSION
             - export RUNNING_TASK=$(aws ecs list-tasks --cluster $SAMPLE_CLUSTER --service-name $SAMPLE_SERVICE | grep $ARN_SUBSTRING | tr -d ' ' | tr -d '"')
           #  - aws ecs stop-task --task $RUNNING_TASK --cluster $SAMPLE_CLUSTER 
