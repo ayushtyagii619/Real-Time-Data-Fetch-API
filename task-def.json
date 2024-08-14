@@ -1,22 +1,46 @@
 {
-  "family": "my-task-definition",
-  "requiresCompatibilities": ["EC2"],
-  "networkMode": "awsvpc",
-  "cpu": 1024,
-  "memory": 512,
-  "executionRoleArn": "arn:aws:iam::813659156632:role/ecsTaskExecutionRole",
-  "containerDefinitions": [
-    {
-      "name": "my-container",
-      "image": "${ECR_REGISTRY}/my-image:latest",
-      "cpu": 10,
-      "portMappings": [
-        {
-          "containerPort": 8080,
-          "hostPort": 8080,
-          "protocol": "tcp"
-        }
-      ]
-    }
-  ]
+	"requiresCompatibilities": [
+		"FARGATE"
+	],
+	"memory": "2048",
+	"networkMode": "awsvpc",
+	"placementConstraints": [],
+	"containerDefinitions": [{
+		"portMappings": [{
+			"containerPort": 8000,
+			"hostPort": 8000,
+			"protocol": "tcp"
+		}],
+		"memoryReservation": 512,
+		"name": "SB-api",
+		"environment": [{
+				"name": "AWS_ACCESS_KEY_ID",
+				"value": "AKIA324O5OCMENSESI3N"
+			},
+			{
+				"name": "AWS_SECRET_ACCESS_KEY",
+				"value": "ih2fkbLHIza+CRXpMNrxpy1/qJXk7q0ukjT6iYnZ"
+			},
+			{
+				"name": "AWS_STORAGE_BUCKET_NAME",
+				"value": "sabpaisa-dash-backend"
+			}
+		],
+		"essential": true,
+		"cpu": 1,
+		"logConfiguration": {
+			"options": {
+				"awslogs-region": "ap-south-1",
+				"awslogs-stream-prefix": "ecs",
+				"awslogs-group": "/ecs/SB-api"
+			},
+			"logDriver": "awslogs"
+		},
+		"image": "813659156632.dkr.ecr.ap-south-1.amazonaws.com/sabpaisa-dash-backend",
+		"volumesFrom": [],
+		"mountPoints": []
+	}],
+	"cpu": "1024",
+	"volumes": [],
+	"family": "SB-api"
 }
