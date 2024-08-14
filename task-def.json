@@ -2,7 +2,7 @@
 	"requiresCompatibilities": [
 		"FARGATE"
 	],
-	"memory": "2048",
+	"memory": "1024",
 	"networkMode": "awsvpc",
 	"placementConstraints": [],
 	"containerDefinitions": [{
@@ -40,7 +40,7 @@
 		"volumesFrom": [],
 		"mountPoints": []
 	}],
-	"cpu": "1024",
+	"cpu": "512",
 	"volumes": [],
 	"family": "SB-api"
 }
