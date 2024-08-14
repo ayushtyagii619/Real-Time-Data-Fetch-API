@@ -2,20 +2,46 @@ image: python:3.12.3
 
 pipelines:
   tags:
-    "ecr-release-*":
+    ecr-release-*:
       - step:
           services:
             - docker
           caches:
             - pip
           script:
-            - pip3 install awscli
-            - IMAGE="813659156632.dkr.ecr.ap-south-1.amazonaws.com/sabpaisa-dash-backend"
-            - TAG="SB-api"
-            - AWS_ECR_URI="813659156632.dkr.ecr.ap-south-1.amazonaws.com/sabpaisa-dash-backend"
-            - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-            - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-            - eval $(aws ecr get-login --region ap-south-1 --no-include-email | sed 's;https://;;g')
-            - docker build -t $IMAGE -f Dockerfile .
-            - docker tag $IMAGE ${AWS_ECR_URI}:${TAG}
-            - docker push ${AWS_ECR_URI}:${TAG}
+            - export SAMPLE_SERVICE=SB-api-service
+            - export SAMPLE_CLUSTER=test-cluster
+            - export EXECUTION_ROLE=arn:aws:iam::813659156632:role/ecsTaskExecutionRole
+            - export EXECUTION_FAMILY=SB-api
+            - export SUBNET_GROUP=subnet-001761a17365eddf4
+            - export SECURITY_GROUP=sg-0b19e5ab3661c487d
+            - export DEFAULT_REGION=ap-south-1
+            - export ARN_SUBSTRING=arn:aws:ecs:ap-south-1:813659156632:task-definition/
+            - export DOCKER_IMAGE_URL=813659156632.dkr.ecr.ap-south-1.amazonaws.com/sabpaisa-dash-backend
+            - curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            - pip install awscli --upgrade --user
+            - export PATH=~/.local/bin:$PATH
+            #- unzip awscli-bundle.zip
+            #- ./awscli-bundle/install -b ~/bin/aws
+            #- export PATH=~/bin:$PATH
+            - aws --version10
+            - echo "Pinging ACR to get login credentials"
+            - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+            - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+            - aws configure set default_region_name $DEFAULT_REGION
+            - echo ${AWS_ACCESS_KEY_ID}
+            - echo ${AWS_SECRET_ACCESS_KEY}
+            - aws ecr get-login-password --region $DEFAULT_REGION | docker login --username AWS --password-stdin $DOCKER_IMAGE_URL
+            - docker build -t sample-python-app  .
+            - docker tag sample-python-app:latest $DOCKER_IMAGE_URL 
+            - docker push $DOCKER_IMAGE_URL
+            - export TASK_VERSION=$((aws ecs register-task-definition --execution-role-arn $EXECUTION_ROLE --cli-input-json file:///opt/atlassian/pipelines/agent/build/task-definition.json) | grep revision | cut -d ":" -f2 | cut -d "," -f1 | tr -d ' ')
+            - echo $TASK_VERSION
+            - export RUNNING_TASK=$(aws ecs list-tasks --cluster $SAMPLE_CLUSTER --service-name $SAMPLE_SERVICE | grep $ARN_SUBSTRING | tr -d ' ' | tr -d '"')
+          #  - aws ecs stop-task --task $RUNNING_TASK --cluster $SAMPLE_CLUSTER 
+            - echo $RUNNING_TASK
+            - echo $SAMPLE_CLUSTER
+            - echo $SAMPLE_SERVICE
+            - echo $EXECUTION_FAMILY
+            - aws ecs update-service --cluster $SAMPLE_CLUSTER --service $SAMPLE_SERVICE --task-definition $EXECUTION_FAMILY:$TASK_VERSION
+          #  - aws ecs run-task --cluster $SAMPLE_CLUSTER --task-definition $EXECUTION_FAMILY:$TASK_VERSION --count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[$SUBNET_GROUP_1,$SUBNET_GROUP_2],securityGroups=[$SECURITY_GROUP]}"
