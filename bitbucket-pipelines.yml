@@ -24,7 +24,7 @@ pipelines:
             #- unzip awscli-bundle.zip
             #- ./awscli-bundle/install -b ~/bin/aws
             #- export PATH=~/bin:$PATH
-            - aws --version10
+            - aws --version
             - echo "Pinging ACR to get login credentials"
             - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
             - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
