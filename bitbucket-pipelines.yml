@@ -28,7 +28,7 @@ pipelines:
             - echo "Pinging ACR to get login credentials"
             - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
             - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
-            - aws configure set default_region_name $DEFAULT_REGION
+            - aws configure set region $DEFAULT_REGION
             - echo ${AWS_ACCESS_KEY_ID}
             - echo ${AWS_SECRET_ACCESS_KEY}
             - aws ecr get-login-password --region $DEFAULT_REGION | docker login --username AWS --password-stdin $DOCKER_IMAGE_URL
@@ -43,5 +43,5 @@ pipelines:
             - echo $SAMPLE_CLUSTER
             - echo $SAMPLE_SERVICE
             - echo $EXECUTION_FAMILY
-            - aws ecs update-service --cluster $SAMPLE_CLUSTER --service $SAMPLE_SERVICE --task-definition $EXECUTION_FAMILY:$TASK_VERSION
+            - aws ecs update-service --cluster $SAMPLE_CLUSTER --service $SAMPLE_SERVICE --task-definition $EXECUTION_FAMILY:$TASK_VERSION --region $DEFAULT_REGION
           #  - aws ecs run-task --cluster $SAMPLE_CLUSTER --task-definition $EXECUTION_FAMILY:$TASK_VERSION --count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[$SUBNET_GROUP_1,$SUBNET_GROUP_2],securityGroups=[$SECURITY_GROUP]}"
