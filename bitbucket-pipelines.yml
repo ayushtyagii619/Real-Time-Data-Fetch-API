@@ -13,9 +13,9 @@ pipelines:
             - export SAMPLE_CLUSTER=test-cluster
             - export EXECUTION_ROLE=arn:aws:iam::813659156632:role/ecsTaskExecutionRole
             - export EXECUTION_FAMILY=SB-api
-            - export SUBNET_GROUP_1=subnet-0d224ad72463a9bd5
-            - export SUBNET_GROUP_2=subnet-074b991b935ba807d
-            - export SECURITY_GROUP=sg-054cb8bd2adabacbe
+            - export SUBNET_GROUP_1=subnet-001761a17365eddf4
+            - export SUBNET_GROUP_2=subnet-09ae33cabd6e38cca
+            - export SECURITY_GROUP=sg-0b19e5ab3661c487d
             - export DEFAULT_REGION=ap-south-1
             - export ARN_SUBSTRING=arn:aws:ecs:ap-south-1:813659156632:task-definition/
             - export DOCKER_IMAGE_URL=813659156632.dkr.ecr.ap-south-1.amazonaws.com/sabpaisa-dash-backend
