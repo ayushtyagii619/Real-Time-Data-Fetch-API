@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire project into the container
 COPY . .
 RUN ls
-RUN cd /sabpaisa_pro
+RUN cd app/sabpaisa_pro
 # Expose the port your app runs on
 EXPOSE 8000
 
