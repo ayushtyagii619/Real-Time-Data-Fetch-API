@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire project into the container
 COPY . .
 RUN ls
-RUN cd app/sabpaisa_pro
+#RUN cd app/sabpaisa_pro
 # Expose the port your app runs on
 EXPOSE 8000
 
@@ -27,4 +27,4 @@ EXPOSE 8000
 #RUN python manage.py collectstatic --noinput
 
 # Start the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "sabpaisa_pro/manage.py", "runserver", "0.0.0.0:8000"]
