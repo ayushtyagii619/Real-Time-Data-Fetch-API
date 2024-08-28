@@ -7,7 +7,6 @@ FROM python:3.12.3
 # Set the working directory
 WORKDIR /app
 
-<<<<<<< HEAD:sabpaisa_pro/Dockerfile
 # Install dependencies
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
@@ -15,10 +14,8 @@ RUN pip install -r requirements.txt
 
 
 # Copy the project code into the container
-COPY . /app/
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+COPY . .
 
-=======
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     libpq-dev \
@@ -44,4 +41,3 @@ EXPOSE 8000
 
 # Start the Django development server
 CMD ["python", "sabpaisa_pro/manage.py", "runserver", "0.0.0.0:8000"]
->>>>>>> 6faeb9476f54287a7b48f0d1f391f81ca0ab94fa:Dockerfile
