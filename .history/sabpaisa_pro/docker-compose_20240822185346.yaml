@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web:
+  build: .
+  container_name: django_web
+  command: ["./wait-for-it.sh", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+  volumes:
+    - .:/app
+  ports:
+    - "8000:8000"
+  environment:
+    DATABASE_NAME: mydatabase
+    DATABASE_USER: myuser
+    DATABASE_PASSWORD: mypassword
+    DATABASE_HOST: db
+    DATABASE_PORT: 3306
+  networks:
+    - app-network
