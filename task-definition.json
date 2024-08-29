@@ -23,7 +23,7 @@
 			},
 			{
 				"name": "AWS_STORAGE_BUCKET_NAME",
-				"value": "sabpaisa-merchant-report"
+				"value": "stage-merchant-report.sabpaisa.in"
 			}
 		],
 		"essential": true,
