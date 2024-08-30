@@ -165,8 +165,3 @@ STATIC_URL = 'static/'
 
 
 AUTH_USER_MODEL = 'sabpaisa_app.NewUser'
-CSRF_TRUSTED_ORIGINS = [
-    'https://stage-merchant-report.sabpaisa.in',
-    # Add other trusted origins if necessary
-]
-
