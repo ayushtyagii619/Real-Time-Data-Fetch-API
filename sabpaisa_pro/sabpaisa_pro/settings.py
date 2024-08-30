@@ -116,7 +116,7 @@ DATABASES = {
         'NAME': 'spreportportal',
         'USER': 'root',
         'PASSWORD': 'y@l!ozQsF-H2toNH',
-        'HOST': 'http://stage-sabpaisa-db.cluster-cwq4xmml0iga.ap-south-1.rds.amazonaws.com',  # Use 'db' as default from .env
+        'HOST': 'stage-sabpaisa-db.cluster-cwq4xmml0iga.ap-south-1.rds.amazonaws.com',  # Use 'db' as default from .env
         'PORT': '3306',  # Use '3306' as default from .env
     }
 }
