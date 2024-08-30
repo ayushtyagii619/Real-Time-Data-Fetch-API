@@ -25,11 +25,6 @@ SECRET_KEY = 'django-insecure-4g627_%o=ckhzj0*(nj^yu3oym6r&)b-9war-+lb!9r=p5!zy7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '10.3.2.142',
-    'stage-sabpaisa-db.cluster-cwq4xmml0iga.ap-south-1.rds.amazonaws.com'
-    # Add other hosts if needed, e.g., 'yourdomain.com'
-]
 
 ALLOWED_HOSTS = ['*']
 
@@ -173,3 +168,8 @@ STATICFILES_DIRS = [
 
 
 AUTH_USER_MODEL = 'sabpaisa_app.NewUser'
+CSRF_TRUSTED_ORIGINS = [
+    'https://stage-merchant-report.sabpaisa.in',
+    # Add other trusted origins if necessary
+]
+
