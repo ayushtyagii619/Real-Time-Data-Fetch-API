@@ -115,12 +115,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'spreportportal',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '172.17.0.2',  # Use 'db' as default from .env
+        'PASSWORD': 'y@l!ozQsF-H2toNH',
+        'HOST': 'http://stage-sabpaisa-db.cluster-cwq4xmml0iga.ap-south-1.rds.amazonaws.com',  # Use 'db' as default from .env
         'PORT': '3306',  # Use '3306' as default from .env
     }
 }
-
+#y@l!ozQsF-H2toNH
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

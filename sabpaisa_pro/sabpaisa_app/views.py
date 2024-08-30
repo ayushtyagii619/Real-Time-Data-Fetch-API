@@ -44,7 +44,7 @@ class ListTransaction(APIView):
 
             filterset = TransactionFilter(request.data, queryset=TransactionDetail.objects.all())
             if not filterset.is_valid():
-                 return Response(filterset.errors,status=status.HTTP_404_NOT_FOUND)
+                return Response(filterset.errors,status=status.HTTP_404_NOT_FOUND)
             filtered_transaction = filterset.qs
 
             if not filtered_transaction.exists():
