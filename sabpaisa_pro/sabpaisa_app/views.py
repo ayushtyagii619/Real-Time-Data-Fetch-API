@@ -57,12 +57,6 @@ class ListTransaction(APIView):
             return Response(serializer.data)
 
             
-    
-def login_page(request):
-    return render(request, 'login.html')
-
-def home_page(request):
-     return render(request,'home.html')
 
 
 def get_tokens_for_user(user):
