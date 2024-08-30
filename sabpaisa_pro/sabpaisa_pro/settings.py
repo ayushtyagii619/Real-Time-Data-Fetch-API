@@ -27,8 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '10.3.2.142',
+    'stage-sabpaisa-db.cluster-cwq4xmml0iga.ap-south-1.rds.amazonaws.com'
     # Add other hosts if needed, e.g., 'yourdomain.com'
 ]
+
+ALLOWED_HOSTS = ['*']
 
 
 
