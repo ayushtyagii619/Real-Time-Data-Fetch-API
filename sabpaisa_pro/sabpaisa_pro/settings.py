@@ -53,8 +53,21 @@ REST_FRAMEWORK = {
 from datetime import timedelta
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=4500),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+    'JTI_CLAIM': 'jti',
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -74,7 +87,7 @@ ROOT_URLCONF = 'sabpaisa_pro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,12 +128,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'spreportportal',
         'USER': 'root',
-        'PASSWORD': 'y@l!ozQsF-H2toNH',
-        'HOST': 'http://stage-sabpaisa-db.cluster-cwq4xmml0iga.ap-south-1.rds.amazonaws.com',  # Use 'db' as default from .env
+        'PASSWORD': 'root',
+        'HOST': '172.17.0.2',  # Use 'db' as default from .env
         'PORT': '3306',  # Use '3306' as default from .env
     }
 }
-#y@l!ozQsF-H2toNH
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -157,9 +170,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

@@ -26,7 +26,6 @@ class TransactionFilter(filters.FilterSet):
 
 
 class ListTransaction(APIView):
-    permission_classes = [IsAuthenticated]
     def post(self,request,id=0):
             paid_start_date = request.data.get('paid_start_date')
             paid_end_date = request.data.get('paid_end_date')
@@ -56,14 +55,6 @@ class ListTransaction(APIView):
             serializer = TransactionSerializer(filtered_transaction,many=True)
             return Response(serializer.data)
 
-            
-    
-def login_page(request):
-    return render(request, 'login.html')
-
-def home_page(request):
-     return render(request,'home.html')
-
 
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
@@ -80,7 +71,7 @@ class UserLoginView(APIView):
             user = authenticate(email=email,password=password)
             if user is not None:
                 access_token, refresh_token = get_tokens_for_user(user)
-                return Response({'access_token':access_token, 'refresh_token': refresh_token, 'msg':'Login Successful'},status=status.HTTP_200_OK)
+                return Response({'refresh_token':access_token, 'access_token': refresh_token, 'msg':'Login Successful'},status=status.HTTP_200_OK)
             else:
                 return Response({'errors':{'non_field_errors':['Email or password is not valid']}},status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)

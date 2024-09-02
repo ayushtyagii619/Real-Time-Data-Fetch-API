@@ -7,32 +7,14 @@ FROM python:3.12.3
 # Set the working directory
 WORKDIR /app
 
-<<<<<<< HEAD:sabpaisa_pro/Dockerfile
-=======
 
->>>>>>> a8aa27601f9f6ff1686f44c0a72dc93152ecdeac:Dockerfile
 # Install dependencies
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
-
-
-# Copy the project code into the container
-<<<<<<< HEAD:sabpaisa_pro/Dockerfile
-
-
-
-
-
-
-
-=======
 COPY . /app/
 
 
-COPY . .
-
->>>>>>> a8aa27601f9f6ff1686f44c0a72dc93152ecdeac:Dockerfile
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     libpq-dev \
@@ -41,10 +23,6 @@ RUN apt-get update && apt-get install -y \
 
 # Copy the requirements file into the container
 COPY requirements.txt .
-<<<<<<< HEAD:sabpaisa_pro/Dockerfile
-
-=======
->>>>>>> a8aa27601f9f6ff1686f44c0a72dc93152ecdeac:Dockerfile
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -60,11 +38,8 @@ EXPOSE 8000
 #RUN python manage.py migrate
 
 
-# Start the Django development server
-<<<<<<< HEAD:sabpaisa_pro/Dockerfile
-CMD ["python", "manage.py", "runserver"]
-=======
 
-CMD ["python", "sabpaisa_pro/manage.py", "runserver", "0.0.0.0:8000"]
 
->>>>>>> a8aa27601f9f6ff1686f44c0a72dc93152ecdeac:Dockerfile
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
