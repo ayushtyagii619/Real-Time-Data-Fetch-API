@@ -8,12 +8,19 @@ FROM python:3.12.3
 WORKDIR /app
 
 
+
 # Install dependencies
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
 COPY . /app/
 
+
+
+
+
+# Copy the project code into the container
+COPY . .
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -40,6 +47,9 @@ EXPOSE 8000
 
 
 
+
+
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
 
 
